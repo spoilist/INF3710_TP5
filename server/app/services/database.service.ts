@@ -166,6 +166,12 @@ export class DatabaseService {
             return this.pool.query(queryText, values);
             }*/
 
+    public async getCliniquesId(): Promise<pg.QueryResult> {
+        await this.pool.connect();
+
+        return this.pool.query('SELECT numclinique FROM bdschema.clinique;');
+    }
+
     public async getAnimals(): Promise<pg.QueryResult> {
         await this.pool.connect();
 
