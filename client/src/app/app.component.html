@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+
+
+<nav class="navbar navbar-dark bg-dark mb-5">
+    <a class="navbar-brand title" href="/">INF3710-TP5</a>
+    <div class="navbar-expand mr-auto">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" routerLink="/select-animal">Select Animal</a>
+        <a class="nav-item nav-link active" routerLink="/insert-animal">Add Animal</a>
+      </div>
+    </div>
+  </nav>
+
+<div style="text-align:center">
+<div *ngIf="route == ''">
+  <button type="button" class="btn btn-danger" (click) ="createDB()">Create Database</button>
+</div>
+
+<router-outlet></router-outlet>
+
+
+<div id="ht" style="text-align:center" *ngIf="route == ''">
+  <input type="text" id="animal-name">
+  <button type="button" class="btn btn-primary" (click)="getAnimalsByName()">Get Animals</button>
+  <table id ="ht" align="center" border="1" width="350">
+    <thead>
+      <th> NOM </th>
+      <th> TYPE </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let animal of animals">
+        <td> {{animal.nom}}</td>
+        <td> {{animal.typeanimal}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
