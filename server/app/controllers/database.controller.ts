@@ -81,15 +81,14 @@ export class DatabaseController {
                     });
             });
 
-        router.get("/animal/name",
-                   (req: Request, res: Response, next: NextFunction) => {
-                       console.log(req.body.body);
-                       this.databaseService.getAnimalsByName(req.body)
+        router.post("/animal/name",
+                    (req: Request, res: Response, next: NextFunction) => {
+                       console.log("TEST" + req.body.nom);
+                       this.databaseService.getAnimalsByName(req.body.nom)
                        .then((result: pg.QueryResult) => {
-                        console.log(result.rows);
                         res.json(result.rows);
                     }).catch((e: Error) => {
-                        console.error(e.stack);
+                        // console.error(e.stack);
                     });
             });
 

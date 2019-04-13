@@ -57,10 +57,11 @@ export class CommunicationService {
         );
     }
 
-    public getAnimalsByName(nom: string): Observable<Animal[]> {
-        const reqBody: Object = {"nom": nom, "body": nom};
+    public getAnimalsByName(nomAnimal: string): Observable<Animal[]> {
+        const reqBody: Object = {nom: nomAnimal};
+        console.log("getAnimalsByName()");
 
-        return this.http.get<Animal[]>(this.BASE_URL + "/animal/name", reqBody).pipe(
+        return this.http.post<Animal[]>(this.BASE_URL + "/animal/name", reqBody).pipe(
             catchError(this.handleError<Animal[]>("getAnimalsByName")),
         );
     }
