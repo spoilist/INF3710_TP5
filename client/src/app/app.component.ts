@@ -12,7 +12,8 @@ import { CommunicationService } from "./communication.service";
 export class AppComponent implements OnInit {
     public route: string;
     public readonly title: string = "INF3710 TP5";
-    public animals: Animal[] = [];
+    public animals: Animal[];
+    public animalName: string;
 
     public constructor(private communicationService: CommunicationService, location: Location, router: Router) {
         router.events.subscribe((val) => {
@@ -23,27 +24,27 @@ export class AppComponent implements OnInit {
               this.route = "";
             }
           });
+        this.animals = [];
+        this.animalName = "";
     }
 
     public ngOnInit(): void {
         // tslint:disable:no-any
         this.communicationService.listen().subscribe((m: any) => {
-            console.log(m);
             this.getAnimalsByName();
         });
     }
 
     public getAnimals(): void {
         this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
-            console.log(animals);
             this.animals = animals;
         });
     }
 
     public getAnimalsByName(): void {
-        this.communicationService.getAnimalsByName("o").subscribe((animals: Animal[]) => {
-            console.log(animals);
+        this.communicationService.getAnimalsByName(this.animalName).subscribe((animals: Animal[]) => {
             this.animals = animals;
+            console.log("CLIENT APP COMPONENT: " + animals);
         });
     }
 

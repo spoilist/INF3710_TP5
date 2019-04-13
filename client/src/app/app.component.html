@@ -21,7 +21,7 @@
 
 
 <div id="ht" style="text-align:center" *ngIf="route == ''">
-  <input type="text" id="animal-name">
+  <input type="text" id="animal-name" [(ngModel)]="animalName">
   <button type="button" class="btn btn-primary" (click)="getAnimalsByName()">Get Animals</button>
   <table id ="ht" align="center" border="1" width="350">
     <thead>

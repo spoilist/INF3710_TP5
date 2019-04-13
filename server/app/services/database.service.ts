@@ -11,7 +11,7 @@ import { data } from "../populateDB";
 export class DatabaseService {
 
     public connectionConfig: pg.ConnectionConfig = {
-        user: "FelixA",
+        user: "noboruyoshida",
         database: "postgres",
         password: "1234",
         port: 5432,
