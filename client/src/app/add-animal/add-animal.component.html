@@ -1,0 +1,61 @@
+    <div class="container">
+        <h1>Ajouter un animal</h1>
+        <form>
+          <div class="form-group">
+            <label for="animal-number">Numéro de l'animal</label>
+            <input type="text" class="form-control" id="animal-number" 
+            [(ngModel)]="animalNumber" name="animal-number" required>
+          </div>
+     
+          <div class="form-group">
+            <label for="owner-number">Numéro du propriétaire</label>
+            <input type="text" class="form-control" id="owner-number" 
+            [(ngModel)]="ownerNumber" name="owner-number" required>
+          </div>
+
+          <div class="form-group">
+              <label for="clinic-number">Numéro du clinique</label>
+              <input type="text" class="form-control" id="clinic-number" 
+              [(ngModel)]="clinicNumber" name="clinic-number" required>
+          </div>
+
+          <div class="form-group">
+                <label for="animal-name">Nom de l'animal</label>
+                <input type="text" class="form-control" id="animal-name" 
+                [(ngModel)]="animalName" name="animal-name" required>
+          </div>
+
+          <div class="form-group">
+              <label for="animal-type">Type animal</label>
+              <input type="text" class="form-control" id="animal-type" 
+              [(ngModel)]="animalType" name="animal-type" required>
+          </div>
+
+          <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" id="description" 
+              [(ngModel)]="description" name="description" required>
+          </div>
+     
+          <div class="form-group">
+              <label for="date-of-birth">Date de naissance</label>
+              <input type="date" class="form-control" id="date-of-birth" 
+              [(ngModel)]="dateOfBirth" name="date-of-birth" required>
+          </div>
+
+          <div class="form-group">
+              <label for="registration-date">Date d'inscription</label>
+              <input type="date" class="form-control" id="registration-date" 
+              [(ngModel)]="registrationDate" name="registration-date" required>
+          </div>
+
+          <div class="form-group">
+              <label for="current-state">État actuel</label>
+              <input type="text" class="form-control" id="current-state" 
+              [(ngModel)]="currentState" name="current-state" required>
+          </div>
+
+          <button type="submit" class="btn btn-success" (click)="addAnimal()">Ajouter animal</button>
+     
+        </form>
+    </div>

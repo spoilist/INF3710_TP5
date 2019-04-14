@@ -59,16 +59,17 @@ export class CommunicationService {
 
     public getAnimalsByName(nomAnimal: string): Observable<Animal[]> {
         const reqBody: Object = {nom: nomAnimal};
-        console.log("getAnimalsByName()");
 
         return this.http.post<Animal[]>(this.BASE_URL + "/animal/name", reqBody).pipe(
             catchError(this.handleError<Animal[]>("getAnimalsByName")),
         );
     }
 
-    public insertAnimal(animal: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/animal/insert", animal).pipe(
-            catchError(this.handleError<number>("insertAnimal")),
+    public addAnimal(animal: Animal): Observable<Animal[]> {
+        console.log("addAnimal() client side");
+
+        return this.http.post<Animal[]>(this.BASE_URL + "/animal/add", animal).pipe(
+            catchError(this.handleError<Animal[]>("addAnimal")),
         );
     }
 
@@ -79,7 +80,7 @@ export class CommunicationService {
                             };
 
         return this.http.post<number>(this.BASE_URL + "/animal/remove", reqBody).pipe(
-            catchError(this.handleError<number>("insertAnimal")),
+            catchError(this.handleError<number>("removeAnimal")),
         );
     }
 
