@@ -1,28 +1,30 @@
     <div class="container">
         <h1>Ajouter un animal</h1>
         <form>
-          <div class="form-group">
-            <label for="animal-number">Numéro de l'animal</label>
-            <input type="text" class="form-control" id="animal-number" 
-            [(ngModel)]="animalNumber" name="animal-number" required>
-          </div>
-     
-          <div class="form-group">
-            <label for="owner-number">Numéro du propriétaire</label>
-            <input type="text" class="form-control" id="owner-number" 
-            [(ngModel)]="ownerNumber" name="owner-number" required>
+          <div>
+            <select #cliniqueId class="browser-default custom-select" (change)="getProprietairesId()" style="width: 300px;">
+                <option selected>Numéro Clinique</option>
+                <option *ngFor="let clinique of cliniquesId">{{clinique.numclinique}}</option>
+            </select>
           </div>
 
-          <div class="form-group">
-              <label for="clinic-number">Numéro du clinique</label>
-              <input type="text" class="form-control" id="clinic-number" 
-              [(ngModel)]="clinicNumber" name="clinic-number" required>
+          <div>
+            <select #proprietaireId class="browser-default custom-select" style="width: 300px;">
+                <option selected>Numéro Proprietaire</option>
+                <option *ngFor="let proprietaire of proprietairesId">{{proprietaire.numproprietaire}}</option>
+            </select>
           </div>
 
+         <div class="form-group">
+              <label for="animal-number">Numéro Animal</label>
+              <input type="text" class="form-control" id="animal-number" 
+              [(ngModel)]="animalNumber" name="animal-number" required>
+          </div>
+    
           <div class="form-group">
-                <label for="animal-name">Nom de l'animal</label>
-                <input type="text" class="form-control" id="animal-name" 
-                [(ngModel)]="animalName" name="animal-name" required>
+              <label for="animal-name">Nom de l'animal</label>
+              <input type="text" class="form-control" id="animal-name" 
+              [(ngModel)]="animalName" name="animal-name" required>
           </div>
 
           <div class="form-group">

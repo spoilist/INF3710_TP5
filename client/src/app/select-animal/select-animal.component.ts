@@ -11,7 +11,7 @@ export class SelectAnimalComponent implements OnInit {
 
   @ViewChild("cliniqueId") private cliniqueId: ElementRef;
   @ViewChild("proprietaireId") private proprietaireId: ElementRef;
-  @ViewChild("animalId") private animalId: ElementRef;
+  @ViewChild("animalId") public animalId: ElementRef;
   @ViewChild("button1") private button1: ElementRef;
   @ViewChild("button2") private button2: ElementRef;
   @ViewChild("button3") private button3: ElementRef;
