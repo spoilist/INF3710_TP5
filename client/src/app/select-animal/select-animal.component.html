@@ -17,7 +17,7 @@
     </select>
   </div>
   <div>
-    <select #animalsId class="browser-default custom-select" (change)="setButtons()" style="width: 300px;">
+    <select #animalId class="browser-default custom-select" (change)="setButtons()" style="width: 300px;">
       <option selected>Numéro animal</option>
       <option *ngFor="let animal of animalsId">{{animal.numanimal}}</option>
     </select>

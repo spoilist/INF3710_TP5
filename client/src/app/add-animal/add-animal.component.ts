@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Animal } from "../../../../common/tables/Animal";
 import { CommunicationService } from "../communication.service";
 
@@ -8,6 +8,9 @@ import { CommunicationService } from "../communication.service";
   styleUrls: ["./add-animal.component.css"]
 })
 export class AddAnimalComponent implements OnInit {
+
+  @ViewChild("cliniqueId") private cliniqueId: ElementRef;
+  @ViewChild("proprietaireId") public proprietaireId: ElementRef;
 
   public animalNumber: string;
   public ownerNumber: string;
@@ -19,8 +22,19 @@ export class AddAnimalComponent implements OnInit {
   public registrationDate: string;
   public currentState: string;
 
+  public cliniquesId: string[];
+  public proprietairesId: string[];
+
   public constructor(
-    private communicationService: CommunicationService, ) {}
+    private communicationService: CommunicationService, ) {
+      this.cliniquesId = [];
+      this.proprietairesId = [];
+    }
+
+  public ngOnInit(): void {
+    console.log("onInit");
+    this.getCliniquesId();
+  }
 
   public addAnimal(): void {
     const animal: Animal = {
@@ -40,8 +54,19 @@ export class AddAnimalComponent implements OnInit {
     console.log("ADD GO");
   }
 
-  public ngOnInit(): void {
-    console.log("onInit");
+  private getCliniquesId(): void {
+    this.communicationService.getCliniquesId().subscribe((cliniquesId: string[]) => {
+      console.log(cliniquesId);
+      this.cliniquesId = cliniquesId;
+    });
+  }
+
+  public getProprietairesId(): void {
+    console.log(this.cliniqueId.nativeElement.value);
+    this.communicationService.getProprietairesId(this.cliniqueId.nativeElement.value).subscribe((proprietairesId: string[]) => {
+      console.log(proprietairesId);
+      this.proprietairesId = proprietairesId;
+    });
   }
 
 }
