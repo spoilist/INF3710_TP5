@@ -10,14 +10,27 @@ import { CommunicationService } from "../communication.service";
 export class SelectAnimalComponent implements OnInit {
 
   @ViewChild("cliniqueId") private cliniqueId: ElementRef;
+  @ViewChild("proprietaireId") private proprietaireId: ElementRef;
+  @ViewChild("button1") private button1: ElementRef;
+  @ViewChild("button2") private button2: ElementRef;
+  @ViewChild("button3") private button3: ElementRef;
+  @ViewChild("button4") private button4: ElementRef;
 
-  public animalsId: number[];
-  public cliniquesId: number[];
-  public proprietairesId: number[];
+
+  public animalsId: string[];
+  public cliniquesId: string[];
+  public proprietairesId: string[];
+  public modify: boolean;
+  public treatment: boolean;
+  public receipt: boolean;
+
   public constructor(private communicationService: CommunicationService) {
     this.animalsId = [];
     this.cliniquesId = [];
     this.proprietairesId = [];
+    this.modify = false;
+    this.treatment = false;
+    this.receipt = false;
   }
 
   public ngOnInit(): void {
@@ -25,7 +38,7 @@ export class SelectAnimalComponent implements OnInit {
   }
 
   private getCliniquesId(): void {
-    this.communicationService.getCliniquesId().subscribe((cliniquesId: number[]) => {
+    this.communicationService.getCliniquesId().subscribe((cliniquesId: string[]) => {
       console.log(cliniquesId);
       this.cliniquesId = cliniquesId;
     });
@@ -33,9 +46,46 @@ export class SelectAnimalComponent implements OnInit {
 
   public getProprietairesId(): void {
     console.log(this.cliniqueId.nativeElement.value);
-    this.communicationService.getProprietairesId(this.cliniqueId.nativeElement.value).subscribe((proprietairesId: number[]) => {
+    this.communicationService.getProprietairesId(this.cliniqueId.nativeElement.value).subscribe((proprietairesId: string[]) => {
       console.log(proprietairesId);
       this.proprietairesId = proprietairesId;
     });
+  }
+
+  public getAnimalsId(): void {
+    console.log(this.proprietaireId.nativeElement.value);
+    this.communicationService.getAnimalsId(this.proprietaireId.nativeElement.value).subscribe((animalsId: string[]) => {
+      this.animalsId = animalsId;
+      console.log(this.animalsId);
+    });
+  }
+
+  public setButtons(): void {
+    this.button1.nativeElement.disabled = false;
+    this.button2.nativeElement.disabled = false;
+    this.button3.nativeElement.disabled = false;
+    this.button4.nativeElement.disabled = false;
+  }
+
+  public setComponent(type: string): void {
+    this.modify = false;
+    this.treatment = false;
+    this.receipt = false;
+    switch (type) {
+      default: {
+        break;
+      }
+      case "modify": {
+        this.modify = true;
+        break;
+      }
+      case "treatment": {
+        this.treatment = true;
+        break;
+      }
+      case "receipt": {
+        this.receipt = true;
+      }
+    }
   }
 }

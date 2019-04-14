@@ -5,33 +5,32 @@
 <h1 id="left"> Select animals:</h1>
 <div class="dropdown_menus">
   <div>
-    <select class="browser-default custom-select" (change)="getProprietairesId()">
+    <select #cliniqueId class="browser-default custom-select" (change)="getProprietairesId()" style="width: 300px;">
       <option selected>Numéro clinique</option>
-      <option #cliniqueId *ngFor="let clinique of cliniquesId">{{clinique.numclinique}}</option>
+      <option *ngFor="let clinique of cliniquesId">{{clinique.numclinique}}</option>
     </select>
   </div>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      Numéro client
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#" *ngFor="let animal of animals">{{animal}}</a>
-    </div>
+  <div>
+    <select #proprietaireId class="browser-default custom-select" (change)="getAnimalsId()" style="width: 300px;">
+      <option selected>Numéro proprietaire</option>
+      <option *ngFor="let proprietaire of proprietairesId">{{proprietaire.numproprietaire}}</option>
+    </select>
   </div>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton  " data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      Numéro animal
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#" *ngFor="let animal of animals">{{animal}}</a>
-    </div>
+  <div>
+    <select #animalsId class="browser-default custom-select" (change)="setButtons()" style="width: 300px;">
+      <option selected>Numéro animal</option>
+      <option *ngFor="let animal of animalsId">{{animal.numanimal}}</option>
+    </select>
   </div>
 </div>
 <div class="buttons_but">
-  <div><button type="button" class="btn btn-warning">Modifier</button></div>
-  <div><button type="button" class="btn btn-danger">Supprimer</button></div>
-  <div><button type="button" class="btn btn-success">Liste traitements</button></div>
-  <div><button type="button" class="btn btn-primary">Générer facture</button></div>
+  <div><button #button1 id="Button1" type="button" class="btn btn-warning" (click)="setComponent('modify')" disabled>Modifier</button></div>
+  <div><button #button2 id="Button2" type="button" class="btn btn-danger" disabled>Supprimer</button></div>
+  <div><button #button3 id="Button3" type="button" class="btn btn-success" (click)="setComponent('treatment')" disabled>Liste traitements</button></div>
+  <div><button #button4 id="Button4" type="button" class="btn btn-primary" (click)="setComponent('receipt')" disabled>Générer facture</button></div>
 </div>
+
+<div *ngIf="this.modify"><p>modify</p></div>
+<div *ngIf="this.delete"><p>delete</p></div>
+<div *ngIf="this.treatment"><p>treatment</p></div>
+<div *ngIf="this.receipt"><p>receipt</p></div>

@@ -172,6 +172,26 @@ export class DatabaseService {
         return this.pool.query('SELECT numclinique FROM bdschema.clinique;');
     }
 
+    public async getProprietairesId(num: string): Promise<pg.QueryResult> {
+        await this.pool.connect();
+        const search: string[] = [num];
+        const queryText: string = `SELECT numproprietaire
+                                   FROM bdschema.proprietaireanimal
+                                   WHERE numclinique = $1;`;
+
+        return this.pool.query(queryText, search);
+    }
+
+    public async getAnimalsId(num: string): Promise<pg.QueryResult> {
+        await this.pool.connect();
+        const search: string[] = [num];
+        const queryText: string = `SELECT numanimal
+                                   FROM bdschema.animal
+                                   WHERE numproprietaire = $1;`;
+
+        return this.pool.query(queryText, search);
+    }
+
     public async getAnimals(): Promise<pg.QueryResult> {
         await this.pool.connect();
 

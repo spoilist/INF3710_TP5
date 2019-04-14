@@ -50,9 +50,27 @@ export class CommunicationService {
         );
     }*/
 
-    public getCliniquesId(): Observable<number[]> {
-        return this.http.get<number[]>(this.BASE_URL + "/clinique/id").pipe(
-            catchError(this.handleError<number[]>("getCliniquesId")),
+    public getCliniquesId(): Observable<string[]> {
+        return this.http.get<string[]>(this.BASE_URL + "/clinique/id").pipe(
+            catchError(this.handleError<string[]>("getCliniquesId")),
+        );
+    }
+
+    public getProprietairesId(numClinique: string): Observable<string[]> {
+        const reqBody: Object = {num: numClinique};
+        console.log("getProprietairesId()");
+
+        return this.http.post<string[]>(this.BASE_URL + "/proprietaire/id", reqBody).pipe(
+            catchError(this.handleError<string[]>("getProprietairesId")),
+        );
+    }
+
+    public getAnimalsId(numProprietaire: string): Observable<string[]> {
+        const reqBody: Object = {num: numProprietaire};
+        console.log("getAnimalsId()");
+
+        return this.http.post<string[]>(this.BASE_URL + "/animals/id", reqBody).pipe(
+            catchError(this.handleError<string[]>("getAnimalsId()")),
         );
     }
 

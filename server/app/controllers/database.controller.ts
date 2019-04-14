@@ -47,6 +47,29 @@ export class DatabaseController {
                 });
             });
 
+        router.post("/proprietaire/id",
+                    (req: Request, res: Response, next: NextFunction) => {
+                console.log("TEST" + req.body.num);
+                this.databaseService.getProprietairesId(req.body.num)
+                    .then((result: pg.QueryResult) => {
+                        res.json(result.rows);
+                    }).catch((e: Error) => {
+                        // console.error(e.stack);
+                    });
+            });
+
+        router.post("/animals/id",
+                    (req: Request, res: Response, next: NextFunction) => {
+        console.log("TEST" + req.body.num);
+        this.databaseService.getAnimalsId(req.body.num)
+            .then((result: pg.QueryResult) => {
+                console.log(result.rows);
+                res.json(result.rows);
+            }).catch((e: Error) => {
+                // console.error(e.stack);
+            });
+    });
+
         router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getAnimals().then((result: pg.QueryResult) => {
@@ -93,9 +116,9 @@ export class DatabaseController {
 
         router.post("/animal/name",
                     (req: Request, res: Response, next: NextFunction) => {
-                       console.log("TEST" + req.body.nom);
-                       this.databaseService.getAnimalsByName(req.body.nom)
-                       .then((result: pg.QueryResult) => {
+                console.log("TEST" + req.body.nom);
+                this.databaseService.getAnimalsByName(req.body.nom)
+                    .then((result: pg.QueryResult) => {
                         res.json(result.rows);
                     }).catch((e: Error) => {
                         // console.error(e.stack);
