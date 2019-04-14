@@ -1,14 +1,14 @@
     <div class="container">
         <h1>Ajouter un animal</h1>
         <form>
-          <div>
+          <div class="dd">
             <select #cliniqueId class="browser-default custom-select" (change)="getProprietairesId()" style="width: 300px;">
                 <option selected>Numéro Clinique</option>
                 <option *ngFor="let clinique of cliniquesId">{{clinique.numclinique}}</option>
             </select>
           </div>
 
-          <div>
+          <div class="dd">
             <select #proprietaireId class="browser-default custom-select" style="width: 300px;">
                 <option selected>Numéro Proprietaire</option>
                 <option *ngFor="let proprietaire of proprietairesId">{{proprietaire.numproprietaire}}</option>

@@ -2,7 +2,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
 }
 .buttons_but {
     display: grid;
@@ -13,4 +13,28 @@
 #left {
     text-align: left;
     margin-left: 10px;
+}
+
+#ht {
+    margin-top: 50px;
+}
+
+#modify {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    margin-top: 50px;
+}
+
+#modified {
+    margin-top: 5px;
+}
+
+#button-modified {
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+#modify-dd {
+    text-align: center;
+    margin-top: 10px;
 }

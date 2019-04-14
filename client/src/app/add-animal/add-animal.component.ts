@@ -51,20 +51,16 @@ export class AddAnimalComponent implements OnInit {
     this.communicationService.addAnimal(animal).subscribe((animals: Animal[]) => {
       console.log(animals);
     });
-    console.log("ADD GO");
   }
 
   private getCliniquesId(): void {
     this.communicationService.getCliniquesId().subscribe((cliniquesId: string[]) => {
-      console.log(cliniquesId);
       this.cliniquesId = cliniquesId;
     });
   }
 
   public getProprietairesId(): void {
-    console.log(this.cliniqueId.nativeElement.value);
     this.communicationService.getProprietairesId(this.cliniqueId.nativeElement.value).subscribe((proprietairesId: string[]) => {
-      console.log(proprietairesId);
       this.proprietairesId = proprietairesId;
     });
   }

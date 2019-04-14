@@ -2,8 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { concat, of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
-// import {Hotel} from "../../../common/tables/Hotel";
-// import { Room } from "../../../common/tables/Room";
 import { Animal } from "../../../common/tables/Animal";
 
 @Injectable()
@@ -22,33 +20,6 @@ export class CommunicationService {
     public filter(filterBy: string): void {
        this._listners.next(filterBy);
     }
-
-/*
-    public getHotels(): Observable<any[]> {
-
-        return this.http.get<Hotel[]>(this.BASE_URL + "/hotel").pipe(
-            catchError(this.handleError<Hotel[]>("getHotels")),
-        );
-    }
-
-    public getHotelPKs(): Observable<string[]> {
-
-        return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(
-            catchError(this.handleError<string[]>("getHotelPKs")),
-        );
-    }
-
-    public insertHotel(hotel: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/hotel/insert", hotel).pipe(
-            catchError(this.handleError<number>("inserHotel")),
-        );
-    }
-
-    public insertRoom(room: Room): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/rooms/insert", room).pipe(
-            catchError(this.handleError<number>("inserHotel")),
-        );
-    }*/
 
     public getCliniquesId(): Observable<string[]> {
         return this.http.get<string[]>(this.BASE_URL + "/clinique/id").pipe(
@@ -97,14 +68,51 @@ export class CommunicationService {
         );
     }
 
-    public removeAnimal(numClinique: string, numProprietaire: string, numAnimal: string): Observable<number> {
+    public removeAnimal(numClinique: string, numProprietaire: string, numAnimal: string): Observable<Animal[]> {
         const reqBody: any = {numClinique: numClinique,
                               numProprietaire: numProprietaire,
                               numAnimal: numAnimal
                             };
 
-        return this.http.post<number>(this.BASE_URL + "/animal/remove", reqBody).pipe(
-            catchError(this.handleError<number>("removeAnimal")),
+        return this.http.post<Animal[]>(this.BASE_URL + "/animal/remove", reqBody).pipe(
+            catchError(this.handleError<Animal[]>("removeAnimal")),
+        );
+    }
+
+    public getAnimalTreatments(numClinique: string, numProprietaire: string, numAnimal: string): Observable<string[]> {
+        const reqBody: any = {numClinique: numClinique,
+                              numProprietaire: numProprietaire,
+                              numAnimal: numAnimal
+          };
+
+        return this.http.post<string[]>(this.BASE_URL + "/animal/treatment", reqBody).pipe(
+            catchError(this.handleError<string[]>("getAnimalTreatments")),
+        );
+    }
+
+    public getAnimalReceipt(numClinique: string, numProprietaire: string, numAnimal: string): Observable<string[]> {
+        const reqBody: any = {numClinique: numClinique,
+                              numProprietaire: numProprietaire,
+                              numAnimal: numAnimal
+          };
+
+        return this.http.post<string[]>(this.BASE_URL + "/animal/receipt", reqBody).pipe(
+            catchError(this.handleError<string[]>("getAnimalReceipt")),
+        );
+    }
+
+    public modifyAnimalAttribute(numClinique: string, numProprietaire: string,
+                                 numAnimal: string, modification: string, modificationInput: string):
+        Observable<Animal[]> {
+        const reqBody: any = {numClinique: numClinique,
+                              numProprietaire: numProprietaire,
+                              numAnimal: numAnimal,
+                              modification: modification,
+                              modificationInput: modificationInput,
+          };
+
+        return this.http.post<Animal[]>(this.BASE_URL + "/animal/modification", reqBody).pipe(
+            catchError(this.handleError<Animal[]>("modifyAnimalAttribute")),
         );
     }
 

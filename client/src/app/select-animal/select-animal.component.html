@@ -22,15 +22,81 @@
       <option *ngFor="let animal of animalsId">{{animal.numanimal}}</option>
     </select>
   </div>
+  <div><a style="color: red; margin-top: 10px;" href="/select-animal">Recommencer</a></div>
 </div>
 <div class="buttons_but">
   <div><button #button1 id="Button1" type="button" class="btn btn-warning" (click)="setComponent('modify')" disabled>Modifier</button></div>
   <div><button #button2 id="Button2" type="button" class="btn btn-danger" (click)="deleteAnimal()" disabled>Supprimer</button></div>
-  <div><button #button3 id="Button3" type="button" class="btn btn-success" (click)="setComponent('treatment')" disabled>Liste traitements</button></div>
-  <div><button #button4 id="Button4" type="button" class="btn btn-primary" (click)="setComponent('receipt')" disabled>Générer facture</button></div>
+  <div><button #button3 id="Button3" type="button" class="btn btn-success" (click)="setComponent('treatment')" disabled>Liste
+      traitements</button></div>
+  <div><button #button4 id="Button4" type="button" class="btn btn-primary" (click)="setComponent('receipt')" disabled>Générer
+      facture</button></div>
 </div>
 
-<div *ngIf="this.modify"><p>modify</p></div>
-<div *ngIf="this.delete"><p>delete</p></div>
-<div *ngIf="this.treatment"><p>treatment</p></div>
-<div *ngIf="this.receipt"><p>receipt</p></div>
+<div id="modify" *ngIf="this.modify">
+  <div>
+    <select #modification id="modify-dd" class="browser-default custom-select" style="width: 300px;">
+      <option selected>Modification</option>
+      <option>numAnimal</option>
+      <option>numProprietaire</option>
+      <option>numClinique</option>
+      <option>nom</option>
+      <option>typeAnimal</option>
+      <option>description</option>
+      <option>dateNaissance</option>
+      <option>dateInscription</option>
+      <option>etatActuel</option>
+    </select>
+  </div>
+  <div>
+    <input type="text" id="modified" placeholder="Modifiez ici!" [(ngModel)]="modifiedInput">
+    <button id="button-modified" type="button" class="btn btn-primary" (click)="modifyAnimalAttribute()">Appliquer</button>
+  </div>
+</div>
+
+<div *ngIf="this.treatment">
+  <div id="ht" style="text-align:center">
+    <table id="ht" align="center" border="1" width="350">
+      <thead>
+        <th> NUMÉRO TRAITEMENT </th>
+        <th> DESCRIPTION </th>
+        <th> COUT</th>
+        <th> DÉBUT TRAITEMENT </th>
+        <th> FIN TRAITEMENT </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let treatment of animalTreatments">
+          <td> {{treatment.numdescriptiontraitement}}</td>
+          <td> {{treatment.description}} </td>
+          <td> {{treatment.cout}} $</td>
+          <td> {{treatment.debuttraitement}} </td>
+          <td> {{treatment.fintraitement}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="this.receipt">
+  <div id="ht" style="text-align:center">
+    <table id="ht" align="center" border="1" width="350">
+      <thead>
+        <th> NUMÉRO TRAITEMENT </th>
+        <th> DESCRIPTION </th>
+        <th> COUT</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let treatment of animalTreatments">
+          <td> {{treatment.numdescriptiontraitement}}</td>
+          <td> {{treatment.description}} </td>
+          <td> {{treatment.cout}} $</td>
+        </tr>
+        <tr *ngFor="let receipt of animalReceipt">
+          <td style="font-weight: bold"> COUT TOTAL </td>
+          <td> </td>
+          <td style="font-weight: bold"> {{receipt.sum}} $</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

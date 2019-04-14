@@ -1,9 +1,7 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
-// import { Message } from "../../../common/communication/message";
 import { Animal } from "../../../common/tables/Animal";
-// import { Room } from "../../../common/tables/Room";
 import { schema } from "../createSchema";
 import { data } from "../populateDB";
 
@@ -41,129 +39,7 @@ export class DatabaseService {
 
         return this.pool.query(`SELECT * FROM bdschema.${tableName};`);
     }
-    /*
-        // HOTEL
-        public getHotels(): Promise<pg.QueryResult> {
-            this.pool.connect();
-
-            return this.pool.query('SELECT * FROM HOTELDB.Hotel;');
-        }
-
-        public getHotelNo(): Promise<pg.QueryResult> {
-            this.pool.connect();
-
-            return this.pool.query('SELECT hotelNo FROM HOTELDB.Hotel;');
-        }
-
-        public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
-            this.pool.connect();
-            const values: string[] = [
-                hotelNo,
-                hotelName,
-                city
-            ];
-            const queryText: string = `INSERT INTO HOTELDB.Hotel VALUES($1, $2, $3);`;
-
-            return this.pool.query(queryText, values);
-        }
-
-        // ROOM
-        public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
-            this.pool.connect();
-
-            let query: string =
-            `SELECT * FROM HOTELDB.room
-            WHERE hotelno=\'${hotelNo}\'`;
-            if (roomType !== undefined) {
-                query = query.concat('AND ');
-                query = query.concat(`typeroom=\'${roomType}\'`);
-            }
-            if (price !== undefined) {
-                query = query.concat('AND ');
-                query = query.concat(`price =\'${price}\'`);
-            }
-            console.log(query);
-
-            return this.pool.query(query);
-        }
-
-        public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
-            this.pool.connect();
-
-            let query: string = 'SELECT * FROM HOTELDB.room \n';
-            const keys: string[] = Object.keys(params);
-            if (keys.length > 0) {
-                query = query.concat(`WHERE ${keys[0]} =\'${params[keys[0]]}\'`);
-            }
-
-            // On enleve le premier element
-            keys.shift();
-
-            // tslint:disable-next-line:forin
-            for (const param in keys) {
-                const value: string = keys[param];
-                query = query.concat(`AND ${value} = \'${params[value]}\'`);
-                if (param === 'price') {
-                    query = query.replace('\'', '');
-                }
-            }
-
-            console.log(query);
-
-            return this.pool.query(query);
-
-        }
-
-        public createRoom(room: Room): Promise<pg.QueryResult> {
-            this.pool.connect();
-            const values: string[] = [
-                room.roomno,
-                room.hotelno,
-                room.typeroom,
-                room.price.toString()
-            ];
-            const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
-
-            return this.pool.query(queryText, values);
-        }
-
-        // GUEST
-        public createGuest(guestNo: string,
-                           nas: string,
-                           guestName: string,
-                           gender: string,
-                           guestCity: string): Promise<pg.QueryResult> {
-            this.pool.connect();
-            const values: string[] = [
-                guestNo,
-                nas,
-                guestName,
-                gender,
-                guestCity
-            ];
-            const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-
-            return this.pool.query(queryText, values);
-        }
-
-        // BOOKING
-        public createBooking(hotelNo: string,
-                             guestNo: string,
-                             dateFrom: Date,
-                             dateTo: Date,
-                             roomNo: string): Promise<pg.QueryResult> {
-            this.pool.connect();
-            const values: string[] = [
-                hotelNo,
-                guestNo,
-                dateFrom.toString(),
-                dateTo.toString(),
-                roomNo
-            ];
-            const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-
-            return this.pool.query(queryText, values);
-            }*/
+    /**    */
 
     public async getCliniquesId(): Promise<pg.QueryResult> {
         await this.pool.connect();
@@ -224,7 +100,8 @@ export class DatabaseService {
             numAnimal,
         ];
         const queryText: string = `DELETE FROM bdschema.animal
-                                   WHERE numClinique = $1 AND numProprietaire = $2 AND numAnimal = $3;`;
+                                   WHERE numclinique = $1 AND numproprietaire = $2 AND numanimal = $3;`;
+        console.log(queryText);
 
         this.pool.query(queryText, values);
     }
@@ -238,20 +115,22 @@ export class DatabaseService {
         return this.pool.query(queryText, search);
     }
 
-    public async getTreatmentByAnimal(numClinique: string, numProprietaire: string, numAnimal: string): Promise<pg.QueryResult> {
+    public async getAnimalTreatments(numClinique: string, numProprietaire: string, numAnimal: string): Promise<pg.QueryResult> {
         await this.pool.connect();
         const values: string[] = [
             numClinique,
             numProprietaire,
             numAnimal,
         ];
-        const queryText: string = `SELECT * FROM bdschema.traitement
-                                   WHERE numClinique = $1 AND numProprietaire = $2 AND numAnimal = $3;`;
+        const queryText: string = `SELECT * FROM bdschema.traitement NATURAL JOIN bdschema.descriptiontraitement
+                                   WHERE numclinique = $1 AND numproprietaire = $2 AND numanimal = $3;`;
+
+        console.log(queryText);
 
         return this.pool.query(queryText, values);
     }
 
-    public async getReceipt(numClinique: string, numProprietaire: string, numAnimal: string): Promise<pg.QueryResult> {
+    public async getAnimalReceipt(numClinique: string, numProprietaire: string, numAnimal: string): Promise<pg.QueryResult> {
         await this.pool.connect();
         const values: string[] = [
             numClinique,
@@ -264,6 +143,100 @@ export class DatabaseService {
                                    AND t.numClinique = $1
                                    AND t.numProprietaire = $2
                                    AND t.numAnimal = $3;`;
+
+        return this.pool.query(queryText, values);
+    }
+
+    // tslint:disable-next-line:max-func-body-length
+    public async setAnimalModification(numClinique: string, numProprietaire: string, numAnimal: string,
+                                       modification: string, modficationInput: string): Promise<pg.QueryResult> {
+        await this.pool.connect();
+        const values: string[] = [
+            numClinique,
+            numProprietaire,
+            numAnimal,
+            modficationInput,
+        ];
+        let queryText: string = "";
+
+        switch (modification) {
+            case "nom": {
+                queryText = `UPDATE bdschema.animal
+                SET nom = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "numAnimal": {
+                queryText = `UPDATE bdschema.animal
+                SET numAnimal = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "numProprietaire": {
+                queryText = `UPDATE bdschema.animal
+                SET numProprietaire = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "numClinique": {
+                queryText = `UPDATE bdschema.animal
+                SET numClinique = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "typeAnimal": {
+                queryText = `UPDATE bdschema.animal
+                SET typeAnimal = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "description": {
+                queryText = `UPDATE bdschema.animal
+                SET description = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "dateNaissance": {
+                queryText = `UPDATE bdschema.animal
+                SET dateNaissance = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "dateInscription": {
+                queryText = `UPDATE bdschema.animal
+                SET dateInscription = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            case "etatActuel": {
+                queryText = `UPDATE bdschema.animal
+                SET etatActuel = $4
+                WHERE numClinique = $1
+                AND numProprietaire = $2
+                AND numAnimal = $3;`;
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        console.log(queryText);
 
         return this.pool.query(queryText, values);
     }

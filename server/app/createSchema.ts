@@ -76,7 +76,8 @@ CREATE TABLE IF NOT EXISTS  bdschema.Traitement (
 		numClinique					VARCHAR(10)		NOT NULL,
 		PRIMARY KEY (numTraitement),
 		FOREIGN KEY (numDescriptionTraitement) REFERENCES bdschema.DescriptionTraitement(numDescriptionTraitement),
-		FOREIGN KEY (numAnimal, numProprietaire, numClinique) REFERENCES bdschema.Animal(numAnimal, numProprietaire, numClinique));
+		FOREIGN KEY (numAnimal, numProprietaire, numClinique) REFERENCES bdschema.Animal(numAnimal, numProprietaire, numClinique)
+		ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS  bdschema.ExamenAnimal (
 		numTraitement		VARCHAR(10)		NOT NULL,
@@ -87,6 +88,7 @@ CREATE TABLE IF NOT EXISTS  bdschema.ExamenAnimal (
 		descriptionResultat	VARCHAR(50)		NOT NULL,
 		numVeterinaire		VARCHAR(10)		NOT NULL,
 		PRIMARY KEY (numTraitement),
-		FOREIGN KEY (numTraitement) REFERENCES bdschema.Traitement(numTraitement),
+		FOREIGN KEY (numTraitement) REFERENCES bdschema.Traitement(numTraitement)
+		ON DELETE CASCADE,
 		FOREIGN KEY (numVeterinaire) REFERENCES bdschema.Veterinaire(numPersonnel));
 `;
