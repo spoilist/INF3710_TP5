@@ -22,7 +22,6 @@ export class DatabaseService {
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
     /*
-
         METHODES DE DEBUG
     */
     public async createSchema(): Promise<pg.QueryResult> {
@@ -204,13 +203,15 @@ export class DatabaseService {
             animal.numAnimal,
             animal.numProprietaire,
             animal.numClinique,
+            animal.nom,
             animal.typeAnimal,
             animal.description,
             animal.dateNaissance,
             animal.dateInscription,
             animal.etatActuel,
         ];
-        const queryText: string = `INSERT INTO bdschema.animal VALUES($1,$2,$3,$4,$5,$6,$7,$8);`;
+        const queryText: string = `INSERT INTO bdschema.animal VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9);`;
+        console.log("FINAL STEP BEFORE ADDING");
 
         return this.pool.query(queryText, values);
     }
@@ -231,7 +232,6 @@ export class DatabaseService {
     public async getAnimalsByName(nom: string): Promise<pg.QueryResult> {
         await this.pool.connect();
         const search: string[] = ['%' + nom + '%'];
-        console.log(search);
         const queryText: string = `SELECT * FROM bdschema.animal
                                    WHERE nom LIKE $1;`;
 

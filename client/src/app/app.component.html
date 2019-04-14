@@ -7,7 +7,7 @@
     <div class="navbar-expand mr-auto">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" routerLink="/select-animal">Select Animal</a>
-        <a class="nav-item nav-link active" routerLink="/insert-animal">Add Animal</a>
+        <a class="nav-item nav-link active" routerLink="/add-animal">Add Animal</a>
       </div>
     </div>
   </nav>
@@ -25,13 +25,27 @@
   <button type="button" class="btn btn-primary" (click)="getAnimalsByName()">Get Animals</button>
   <table id ="ht" align="center" border="1" width="350">
     <thead>
+      <th> NUMÉRO ANIMAL </th>
+      <th> NUMÉRO PROPRIÉTAIRE </th>
+      <th> NUMÉRO CLINIQUE </th>
       <th> NOM </th>
-      <th> TYPE </th>
+      <th> TYPE ANIMAL </th>
+      <th> DESCRIPTION </th>
+      <th> DATE DE NAISSANCE </th>
+      <th> DATE D'INSCRIPTION </th>
+      <th> ÉTAT ACTUEL </th>
     </thead>
     <tbody>
       <tr *ngFor="let animal of animals">
-        <td> {{animal.nom}}</td>
+        <td> {{animal.numanimal}}</td>
+        <td> {{animal.numproprietaire}} </td>
+        <td> {{animal.numclinique}} </td>
+        <td> {{animal.nom}} </td>
         <td> {{animal.typeanimal}} </td>
+        <td> {{animal.description}} </td>
+        <td> {{animal.datenaissance}} </td>
+        <td> {{animal.dateinscription}} </td>
+        <td> {{animal.etatactuel}} </td>
       </tr>
     </tbody>
   </table>

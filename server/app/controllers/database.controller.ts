@@ -73,15 +73,15 @@ export class DatabaseController {
         router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getAnimals().then((result: pg.QueryResult) => {
-                    console.log(result.rows);
                     res.json(result.rows);
                 }).catch((e: Error) => {
                     console.error(e.stack);
                 });
             });
 
-        router.post("/animal/insert",
+        router.post("/animal/add",
                     (req: Request, res: Response, next: NextFunction) => {
+                console.log("ALLO");
                 const animal: Animal = {
                     numAnimal: req.body.numAnimal,
                     numProprietaire: req.body.numProprietaire,
@@ -93,7 +93,7 @@ export class DatabaseController {
                     dateInscription: req.body.dateInscription,
                     etatActuel: req.body.etatActuel,
                 };
-                console.log(animal);
+                console.log("Received add animal request");
 
                 this.databaseService.addAnimal(animal)
                     .then((result: pg.QueryResult) => {
@@ -116,9 +116,8 @@ export class DatabaseController {
 
         router.post("/animal/name",
                     (req: Request, res: Response, next: NextFunction) => {
-                console.log("TEST" + req.body.nom);
-                this.databaseService.getAnimalsByName(req.body.nom)
-                    .then((result: pg.QueryResult) => {
+                       this.databaseService.getAnimalsByName(req.body.nom)
+                       .then((result: pg.QueryResult) => {
                         res.json(result.rows);
                     }).catch((e: Error) => {
                         // console.error(e.stack);
