@@ -1,0 +1,16 @@
+.dropdown_menus {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.buttons_but {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin-top: 50px;
+}
+
+#left {
+    text-align: left;
+    margin-left: 10px;
+}

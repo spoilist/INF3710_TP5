@@ -50,6 +50,12 @@ export class CommunicationService {
         );
     }*/
 
+    public getCliniquesId(): Observable<number[]> {
+        return this.http.get<number[]>(this.BASE_URL + "/clinique/id").pipe(
+            catchError(this.handleError<number[]>("getCliniquesId")),
+        );
+    }
+
     public getAnimals(): Observable<any[]> {
 
         return this.http.get<Animal[]>(this.BASE_URL + "/animal").pipe(

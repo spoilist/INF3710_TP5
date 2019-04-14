@@ -37,6 +37,16 @@ export class DatabaseController {
                 });
             });
 
+        router.get("/clinique/id",
+                   (req: Request, res: Response, next: NextFunction) => {
+                this.databaseService.getCliniquesId().then((result: pg.QueryResult) => {
+                    console.log(result.rows);
+                    res.json(result.rows);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
         router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getAnimals().then((result: pg.QueryResult) => {

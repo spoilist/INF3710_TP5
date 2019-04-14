@@ -11,7 +11,7 @@ import { data } from "../populateDB";
 export class DatabaseService {
 
     public connectionConfig: pg.ConnectionConfig = {
-        user: "noboruyoshida",
+        user: "",
         database: "postgres",
         password: "1234",
         port: 5432,
@@ -164,6 +164,12 @@ export class DatabaseService {
 
             return this.pool.query(queryText, values);
             }*/
+
+    public async getCliniquesId(): Promise<pg.QueryResult> {
+        await this.pool.connect();
+
+        return this.pool.query('SELECT numclinique FROM bdschema.clinique;');
+    }
 
     public async getAnimals(): Promise<pg.QueryResult> {
         await this.pool.connect();

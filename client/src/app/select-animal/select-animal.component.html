@@ -1,17 +1,37 @@
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="bootstrap.bundle.min.js / bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 </head>
-<div id="room" style="text-align: left">
-  <h1> Select Animal</h1>
+<h1 id="left"> Select animals:</h1>
+<div class="dropdown_menus">
+  <div>
+    <select class="browser-default custom-select" (change)="getProprietairesId()">
+      <option selected>Numéro clinique</option>
+      <option #cliniqueId *ngFor="let clinique of cliniquesId">{{clinique.numclinique}}</option>
+    </select>
+  </div>
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      Dropdown button
+      Numéro client
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
+      <a class="dropdown-item" href="#" *ngFor="let animal of animals">{{animal}}</a>
     </div>
+  </div>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton  " data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Numéro animal
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#" *ngFor="let animal of animals">{{animal}}</a>
+    </div>
+  </div>
+</div>
+<div class="buttons_but">
+  <div><button type="button" class="btn btn-warning">Modifier</button></div>
+  <div><button type="button" class="btn btn-danger">Supprimer</button></div>
+  <div><button type="button" class="btn btn-success">Liste traitements</button></div>
+  <div><button type="button" class="btn btn-primary">Générer facture</button></div>
 </div>
