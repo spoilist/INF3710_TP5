@@ -11,11 +11,11 @@ export class SelectAnimalComponent implements OnInit {
 
   @ViewChild("cliniqueId") private cliniqueId: ElementRef;
   @ViewChild("proprietaireId") private proprietaireId: ElementRef;
+  @ViewChild("animalId") private animalId: ElementRef;
   @ViewChild("button1") private button1: ElementRef;
   @ViewChild("button2") private button2: ElementRef;
   @ViewChild("button3") private button3: ElementRef;
   @ViewChild("button4") private button4: ElementRef;
-
 
   public animalsId: string[];
   public cliniquesId: string[];
@@ -55,6 +55,15 @@ export class SelectAnimalComponent implements OnInit {
   public getAnimalsId(): void {
     console.log(this.proprietaireId.nativeElement.value);
     this.communicationService.getAnimalsId(this.proprietaireId.nativeElement.value).subscribe((animalsId: string[]) => {
+      this.animalsId = animalsId;
+      console.log(this.animalsId);
+    });
+  }
+  
+  public deleteAnimal(): void {
+    this.communicationService.removeAnimal(this.cliniqueId.nativeElement.value,
+                                           this.proprietaireId.nativeElement.value,
+                                           this.animalsId.nativeElement.value).subscribe((animalsId: string[]) => {
       this.animalsId = animalsId;
       console.log(this.animalsId);
     });

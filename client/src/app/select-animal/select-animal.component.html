@@ -17,7 +17,7 @@
     </select>
   </div>
   <div>
-    <select #animalsId class="browser-default custom-select" (change)="setButtons()" style="width: 300px;">
+    <select #animalId class="browser-default custom-select" (change)="setButtons()" style="width: 300px;">
       <option selected>Numéro animal</option>
       <option *ngFor="let animal of animalsId">{{animal.numanimal}}</option>
     </select>
@@ -25,7 +25,7 @@
 </div>
 <div class="buttons_but">
   <div><button #button1 id="Button1" type="button" class="btn btn-warning" (click)="setComponent('modify')" disabled>Modifier</button></div>
-  <div><button #button2 id="Button2" type="button" class="btn btn-danger" disabled>Supprimer</button></div>
+  <div><button #button2 id="Button2" type="button" class="btn btn-danger" (click)="deleteAnimal()" disabled>Supprimer</button></div>
   <div><button #button3 id="Button3" type="button" class="btn btn-success" (click)="setComponent('treatment')" disabled>Liste traitements</button></div>
   <div><button #button4 id="Button4" type="button" class="btn btn-primary" (click)="setComponent('receipt')" disabled>Générer facture</button></div>
 </div>
