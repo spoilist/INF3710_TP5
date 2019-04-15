@@ -26,7 +26,7 @@
     <input type="text" id="animal-name" placeholder="Entrer un nom d'animal" [(ngModel)]="animalName" style="width: 300px">
   </div> 
   <button type="button" class="btn btn-primary" (click)="getAnimalsByName()">Rechercher Animal</button>
-  <table id ="ht" align="center" border="1" width="350">
+  <table #table class="table" id ="ht" align="center" border="1" width="350" style="display: none;">
     <thead>
       <th> NUMÉRO ANIMAL </th>
       <th> NUMÉRO PROPRIÉTAIRE </th>

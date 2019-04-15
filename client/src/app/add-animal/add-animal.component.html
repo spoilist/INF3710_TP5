@@ -1,63 +1,63 @@
-    <div class="container">
-        <h1>Ajouter un animal</h1>
-        <form>
-          <div class="dd">
-            <select #cliniqueId class="browser-default custom-select" (change)="getProprietairesId()" style="width: 300px;">
+<div class="container">
+    <h1>Ajouter un animal</h1>
+    <form>
+        <div class="dd">
+            <select #cliniqueId class="browser-default custom-select" (change)="getProprietairesId()" style="width: 300px;" required>
                 <option selected>Numéro Clinique</option>
                 <option *ngFor="let clinique of cliniquesId">{{clinique.numclinique}}</option>
             </select>
-          </div>
+        </div>
 
-          <div class="dd">
-            <select #proprietaireId class="browser-default custom-select" style="width: 300px;">
+        <div class="dd">
+            <select #proprietaireId class="browser-default custom-select" style="width: 300px;" required>
                 <option selected>Numéro Proprietaire</option>
                 <option *ngFor="let proprietaire of proprietairesId">{{proprietaire.numproprietaire}}</option>
             </select>
-          </div>
+        </div>
 
-         <div class="form-group">
-              <label for="animal-number">Numéro Animal</label>
-              <input type="text" class="form-control" id="animal-number" 
-              [(ngModel)]="animalNumber" name="animal-number" required>
-          </div>
-    
-          <div class="form-group">
-              <label for="animal-name">Nom de l'animal</label>
-              <input type="text" class="form-control" id="animal-name" 
-              [(ngModel)]="animalName" name="animal-name" required>
-          </div>
+        <div class="form-group">
+            <label for="animal-number">Numéro Animal</label>
+            <input type="text" class="form-control" id="animal-number" [(ngModel)]="animalNumber" name="animal-number"
+                required maxlength="10">
+        </div>
 
-          <div class="form-group">
-              <label for="animal-type">Type animal</label>
-              <input type="text" class="form-control" id="animal-type" 
-              [(ngModel)]="animalType" name="animal-type" required>
-          </div>
+        <div class="form-group">
+            <label for="animal-name">Nom de l'animal</label>
+            <input type="text" class="form-control" id="animal-name" [(ngModel)]="animalName" name="animal-name"
+                required maxlength="10">
+        </div>
 
-          <div class="form-group">
-              <label for="description">Description</label>
-              <input type="text" class="form-control" id="description" 
-              [(ngModel)]="description" name="description" required>
-          </div>
-     
-          <div class="form-group">
-              <label for="date-of-birth">Date de naissance</label>
-              <input type="date" class="form-control" id="date-of-birth" 
-              [(ngModel)]="dateOfBirth" name="date-of-birth" required>
-          </div>
+        <div class="form-group">
+            <label for="animal-type">Type animal</label>
+            <input type="text" class="form-control" id="animal-type" [(ngModel)]="animalType" name="animal-type"
+                required maxlength="10">
+        </div>
 
-          <div class="form-group">
-              <label for="registration-date">Date d'inscription</label>
-              <input type="date" class="form-control" id="registration-date" 
-              [(ngModel)]="registrationDate" name="registration-date" required>
-          </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" [(ngModel)]="description" name="description"
+                required maxlength="20">
+        </div>
 
-          <div class="form-group">
-              <label for="current-state">État actuel</label>
-              <input type="text" class="form-control" id="current-state" 
-              [(ngModel)]="currentState" name="current-state" required>
-          </div>
+        <div class="form-group">
+            <label for="date-of-birth">Date de naissance</label>
+            <input type="date" class="form-control" id="date-of-birth" [(ngModel)]="dateOfBirth" name="date-of-birth"
+                required>
+        </div>
 
-          <button type="submit" class="btn btn-success" (click)="addAnimal()">Ajouter animal</button>
-     
-        </form>
-    </div>
+        <div class="form-group">
+            <label for="registration-date">Date d'inscription</label>
+            <input type="date" class="form-control" id="registration-date" [(ngModel)]="registrationDate" name="registration-date"
+                required>
+        </div>
+        <div class="form-group">
+            <select #state class="browser-default custom-select" required>
+                <option selected>vivant</option>
+                <option >decede</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success" (click)="addAnimal()">Ajouter animal</button>
+
+    </form>
+</div>

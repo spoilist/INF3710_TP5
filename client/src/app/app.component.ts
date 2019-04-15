@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { Animal } from "../../../common/tables/Animal";
 import { CommunicationService } from "./communication.service";
@@ -10,6 +10,8 @@ import { CommunicationService } from "./communication.service";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
+    @ViewChild("table") private table: ElementRef;
+
     public route: string;
     public readonly title: string = "INF3710 TP5";
     public animals: Animal[];
@@ -45,6 +47,7 @@ export class AppComponent implements OnInit {
         this.communicationService.getAnimalsByName(this.animalName).subscribe((animals: Animal[]) => {
             this.animals = animals;
         });
+        this.table.nativeElement.style.display = "block";
     }
 
     public createDB(): void {

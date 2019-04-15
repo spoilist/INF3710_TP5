@@ -11,16 +11,14 @@ export class AddAnimalComponent implements OnInit {
 
   @ViewChild("cliniqueId") private cliniqueId: ElementRef;
   @ViewChild("proprietaireId") public proprietaireId: ElementRef;
+  @ViewChild("state") public state: ElementRef;
 
   public animalNumber: string;
-  public ownerNumber: string;
-  public clinicNumber: string;
   public animalName: string;
   public animalType: string;
   public description: string;
   public dateOfBirth: string;
   public registrationDate: string;
-  public currentState: string;
 
   public cliniquesId: string[];
   public proprietairesId: string[];
@@ -38,14 +36,14 @@ export class AddAnimalComponent implements OnInit {
   public addAnimal(): void {
     const animal: Animal = {
       numAnimal: this.animalNumber,
-      numProprietaire: this.ownerNumber,
-      numClinique: this.clinicNumber,
+      numProprietaire: this.proprietaireId.nativeElement.value,
+      numClinique: this.cliniqueId.nativeElement.value,
       nom: this.animalName,
       typeAnimal: this.animalType,
       description: this.description,
       dateNaissance: this.dateOfBirth,
       dateInscription: this.registrationDate,
-      etatActuel: this.currentState,
+      etatActuel: this.state.nativeElement.value,
     };
     this.communicationService.addAnimal(animal).subscribe((animals: Animal[]) => {
       console.log(animals);
