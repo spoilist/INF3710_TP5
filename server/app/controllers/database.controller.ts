@@ -36,7 +36,6 @@ export class DatabaseController {
         router.get("/clinique/id",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getCliniquesId().then((result: pg.QueryResult) => {
-                    console.log(result.rows);
                     res.json(result.rows);
                 }).catch((e: Error) => {
                     console.error(e.stack);
@@ -45,7 +44,6 @@ export class DatabaseController {
 
         router.post("/proprietaire/id",
                     (req: Request, res: Response, next: NextFunction) => {
-                console.log("TEST" + req.body.num);
                 this.databaseService.getProprietairesId(req.body.num)
                     .then((result: pg.QueryResult) => {
                         res.json(result.rows);
@@ -56,7 +54,6 @@ export class DatabaseController {
 
         router.post("/animals/id",
                     (req: Request, res: Response, next: NextFunction) => {
-                console.log("TEST" + req.body.num);
                 this.databaseService.getAnimalsId(req.body.num)
                     .then((result: pg.QueryResult) => {
                         console.log(result.rows);
@@ -77,7 +74,6 @@ export class DatabaseController {
 
         router.post("/animal/add",
                     (req: Request, res: Response, next: NextFunction) => {
-                console.log("ALLO");
                 const animal: Animal = {
                     numAnimal: req.body.numAnimal,
                     numProprietaire: req.body.numProprietaire,
@@ -89,7 +85,6 @@ export class DatabaseController {
                     dateInscription: req.body.dateInscription,
                     etatActuel: req.body.etatActuel,
                 };
-                console.log("Received add animal request");
 
                 this.databaseService.addAnimal(animal)
                     .then((result: pg.QueryResult) => {
@@ -124,7 +119,6 @@ export class DatabaseController {
                     (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getAnimalTreatments(req.body.numClinique, req.body.numProprietaire, req.body.numAnimal)
                     .then((result: pg.QueryResult) => {
-                        console.log(result.rows);
                         res.json(result.rows);
                     }).catch((e: Error) => {
                         console.error(e.stack);
@@ -135,7 +129,6 @@ export class DatabaseController {
                     (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getAnimalReceipt(req.body.numClinique, req.body.numProprietaire, req.body.numAnimal)
                     .then((result: pg.QueryResult) => {
-                        console.log(result.rows);
                         res.json(result.rows);
                     }).catch((e: Error) => {
                         console.error(e.stack);
@@ -146,7 +139,6 @@ export class DatabaseController {
                 this.databaseService.setAnimalModification(req.body.numClinique, req.body.numProprietaire, req.body.numAnimal,
                                                            req.body.modification, req.body.modificationInput)
                     .then((result: pg.QueryResult) => {
-                        console.log(result.rows);
                         res.json(result.rows);
                     }).catch((e: Error) => {
                         console.error(e.stack);

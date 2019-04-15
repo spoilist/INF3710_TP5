@@ -29,7 +29,6 @@ export class CommunicationService {
 
     public getProprietairesId(numClinique: string): Observable<string[]> {
         const reqBody: Object = {num: numClinique};
-        console.log("getProprietairesId()");
 
         return this.http.post<string[]>(this.BASE_URL + "/proprietaire/id", reqBody).pipe(
             catchError(this.handleError<string[]>("getProprietairesId")),
@@ -38,7 +37,6 @@ export class CommunicationService {
 
     public getAnimalsId(numProprietaire: string): Observable<string[]> {
         const reqBody: Object = {num: numProprietaire};
-        console.log("getAnimalsId()");
 
         return this.http.post<string[]>(this.BASE_URL + "/animals/id", reqBody).pipe(
             catchError(this.handleError<string[]>("getAnimalsId()")),
@@ -61,8 +59,6 @@ export class CommunicationService {
     }
 
     public addAnimal(animal: Animal): Observable<Animal[]> {
-        console.log("addAnimal() client side");
-
         return this.http.post<Animal[]>(this.BASE_URL + "/animal/add", animal).pipe(
             catchError(this.handleError<Animal[]>("addAnimal")),
         );

@@ -6,15 +6,15 @@
     <a class="navbar-brand title" href="/">INF3710-TP5</a>
     <div class="navbar-expand mr-auto">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" routerLink="/select-animal">Select Animal</a>
-        <a class="nav-item nav-link active" routerLink="/add-animal">Add Animal</a>
+        <a class="nav-item nav-link active" routerLink="/select-animal">Selectionner Animal</a>
+        <a class="nav-item nav-link active" routerLink="/add-animal">Insérer Animal</a>
       </div>
     </div>
   </nav>
 
 <div style="text-align:center">
 <div *ngIf="route == ''">
-  <button type="button" class="btn btn-danger" (click) ="createDB()">Create Database</button>
+  <button type="button" class="btn btn-danger" (click) ="createDB()">Créer BD</button>
 </div>
 
 <router-outlet></router-outlet>
@@ -22,9 +22,10 @@
 
 <div id="ht" style="text-align:center" *ngIf="route == ''">
   <div>
-    <input type="text" id="animal-name" [(ngModel)]="animalName">
+    <h3>Recherche d'un animal:</h3>
+    <input type="text" id="animal-name" placeholder="Entrer un nom d'animal" [(ngModel)]="animalName" style="width: 300px">
   </div> 
-  <button type="button" class="btn btn-primary" (click)="getAnimalsByName()">Get Animals</button>
+  <button type="button" class="btn btn-primary" (click)="getAnimalsByName()">Rechercher Animal</button>
   <table id ="ht" align="center" border="1" width="350">
     <thead>
       <th> NUMÉRO ANIMAL </th>

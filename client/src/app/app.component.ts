@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
     public getAnimalsByName(): void {
         this.communicationService.getAnimalsByName(this.animalName).subscribe((animals: Animal[]) => {
             this.animals = animals;
-            console.log("CLIENT APP COMPONENT: " + animals);
         });
     }
 

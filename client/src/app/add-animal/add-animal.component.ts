@@ -32,7 +32,6 @@ export class AddAnimalComponent implements OnInit {
     }
 
   public ngOnInit(): void {
-    console.log("onInit");
     this.getCliniquesId();
   }
 
@@ -51,6 +50,8 @@ export class AddAnimalComponent implements OnInit {
     this.communicationService.addAnimal(animal).subscribe((animals: Animal[]) => {
       console.log(animals);
     });
+    alert("Animal ajouté!");
+    location.reload();
   }
 
   private getCliniquesId(): void {

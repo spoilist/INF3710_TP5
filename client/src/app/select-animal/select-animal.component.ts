@@ -58,10 +58,8 @@ export class SelectAnimalComponent implements OnInit {
   }
 
   public getAnimalsId(): void {
-    console.log(this.proprietaireId.nativeElement.value);
     this.communicationService.getAnimalsId(this.proprietaireId.nativeElement.value).subscribe((animalsId: string[]) => {
       this.animalsId = animalsId;
-      console.log(this.animalsId);
     });
   }
 
@@ -73,6 +71,8 @@ export class SelectAnimalComponent implements OnInit {
                                              this.animalId.nativeElement.value).subscribe((animal: Animal[]) => {
           console.log("Deleted!");
         });
+      alert("Animal supprimé!");
+      location.reload();
     }
   }
 
@@ -100,6 +100,7 @@ export class SelectAnimalComponent implements OnInit {
                                                     this.modifiedInput).subscribe((animal: Animal[]) => {
                                                       console.log("Modified!");
                                                     });
+    alert("Attribut modifié!");
   }
 
   public setButtons(): void {

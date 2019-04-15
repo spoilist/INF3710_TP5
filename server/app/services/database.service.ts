@@ -87,7 +87,6 @@ export class DatabaseService {
             animal.etatActuel,
         ];
         const queryText: string = `INSERT INTO bdschema.animal VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9);`;
-        console.log("FINAL STEP BEFORE ADDING");
 
         return this.pool.query(queryText, values);
     }
@@ -101,7 +100,6 @@ export class DatabaseService {
         ];
         const queryText: string = `DELETE FROM bdschema.animal
                                    WHERE numclinique = $1 AND numproprietaire = $2 AND numanimal = $3;`;
-        console.log(queryText);
 
         this.pool.query(queryText, values);
     }
@@ -124,8 +122,6 @@ export class DatabaseService {
         ];
         const queryText: string = `SELECT * FROM bdschema.traitement NATURAL JOIN bdschema.descriptiontraitement
                                    WHERE numclinique = $1 AND numproprietaire = $2 AND numanimal = $3;`;
-
-        console.log(queryText);
 
         return this.pool.query(queryText, values);
     }
@@ -163,30 +159,6 @@ export class DatabaseService {
             case "nom": {
                 queryText = `UPDATE bdschema.animal
                 SET nom = $4
-                WHERE numClinique = $1
-                AND numProprietaire = $2
-                AND numAnimal = $3;`;
-                break;
-            }
-            case "numAnimal": {
-                queryText = `UPDATE bdschema.animal
-                SET numAnimal = $4
-                WHERE numClinique = $1
-                AND numProprietaire = $2
-                AND numAnimal = $3;`;
-                break;
-            }
-            case "numProprietaire": {
-                queryText = `UPDATE bdschema.animal
-                SET numProprietaire = $4
-                WHERE numClinique = $1
-                AND numProprietaire = $2
-                AND numAnimal = $3;`;
-                break;
-            }
-            case "numClinique": {
-                queryText = `UPDATE bdschema.animal
-                SET numClinique = $4
                 WHERE numClinique = $1
                 AND numProprietaire = $2
                 AND numAnimal = $3;`;
@@ -236,7 +208,6 @@ export class DatabaseService {
                 break;
             }
         }
-        console.log(queryText);
 
         return this.pool.query(queryText, values);
     }
